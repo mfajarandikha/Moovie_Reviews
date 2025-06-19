@@ -10,10 +10,8 @@ class AppTheme {
 
     colorScheme: const ColorScheme.dark(
       primary: AppColors.netflixRed,
-      background: AppColors.netflixBlack,
       surface: AppColors.netflixDarkGrey,
-      onPrimary: Colors.white,
-      onBackground: AppColors.netflixLightGrey,
+      onPrimary: AppColors.netflixLightGrey,
       onSurface: Colors.white,
     ),
 

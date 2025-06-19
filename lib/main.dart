@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:moovie/pages/splash_screen.dart'; // Import the splash screen
-import 'package:moovie/theme/app_theme.dart'; // Import your theme
-
+import 'package:moovie/pages/splash_screen.dart';
+import 'package:moovie/theme/app_theme.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -13,9 +12,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Moovie',
-      theme: AppTheme.darkTheme, // Apply your custom dark theme
+      theme: AppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen(), // Start the app with the SplashScreen
+      home: const SplashScreen(),
     );
   }
 }

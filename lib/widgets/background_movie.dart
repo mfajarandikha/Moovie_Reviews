@@ -1,10 +1,9 @@
-// widgets/background_movie.dart
 import 'package:flutter/material.dart';
 import 'package:moovie/models/movie_model.dart';
 
 class BackgroundMovie extends StatelessWidget {
   final Movie? movie;
-  final Function(Movie) onTap;
+  final void Function(Movie) onTap;
 
   const BackgroundMovie({
     super.key,
@@ -16,47 +15,67 @@ class BackgroundMovie extends StatelessWidget {
   Widget build(BuildContext context) {
     if (movie == null) {
       return const SizedBox(
-        height: 400,
+        height: 300,
         child: Center(child: CircularProgressIndicator()),
       );
     }
 
+    final imageUrl = movie!.backdropPath != null
+        ? 'https://image.tmdb.org/t/p/w780${movie!.backdropPath}'
+        : (movie!.posterPath != null
+        ? 'https://image.tmdb.org/t/p/w780${movie!.posterPath}'
+        : null);
+
     return GestureDetector(
       onTap: () => onTap(movie!),
       child: Stack(
-        alignment: Alignment.bottomLeft,
         children: [
           SizedBox(
-            height: 400,
+            height: 300,
             width: double.infinity,
-            child: Image.network(
-              'https://image.tmdb.org/t/p/w500${movie!.backdropPath}',
+            child: imageUrl != null
+                ? Image.network(
+              imageUrl,
               fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => const Icon(Icons.broken_image, color: Colors.white),
-            ),
+              errorBuilder: (_, __, ___) =>
+              const Icon(Icons.broken_image, size: 48),
+            )
+                : const Center(child: Icon(Icons.broken_image, size: 48)),
           ),
           Container(
-            height: 400,
+            height: 300,
             width: double.infinity,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Colors.black.withOpacity(0.9), Colors.transparent],
+                colors: [
+                  Colors.black.withOpacity(0.6),
+                  Colors.transparent,
+                ],
                 begin: Alignment.bottomCenter,
                 end: Alignment.topCenter,
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
+          Positioned(
+            bottom: 20,
+            left: 16,
+            right: 16,
             child: Text(
               movie!.title,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
+                shadows: [
+                  Shadow(
+                    offset: Offset(1, 1),
+                    blurRadius: 3,
+                    color: Colors.black,
+                  ),
+                ],
               ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],

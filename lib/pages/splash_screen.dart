@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'dashboard.dart';
+import 'package:moovie/theme/app_colors.dart';
+import 'main_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
       const Duration(seconds: 2),
           () => Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const DashboardPage()),
+        MaterialPageRoute(builder: (context) => MainPage()),
       ),
     );
   }
@@ -29,22 +30,20 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Display your logo
             Image.asset(
               'assets/images/splash_screen.png',
               height: 450,
-              // Provide a fallback in case the image fails to load
               errorBuilder: (context, error, stackTrace) {
                 return const Icon(
                   Icons.movie_creation_outlined,
                   size: 150,
-                  color: Colors.red,
+                  color: AppColors.netflixRed,
                 );
               },
             ),
             const SizedBox(height: 24),
             const CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              valueColor: AlwaysStoppedAnimation<Color>(AppColors.netflixLightGrey),
             ),
           ],
         ),
